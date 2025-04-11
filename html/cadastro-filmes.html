@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Filmes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Cinema</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link active" href="./cadastro-filmes.html">Cadastro de Filmes</a></li>
+            <li class="nav-item"><a class="nav-link" href="./cadastro-salas.html">Cadastro de Salas</a></li>
+            <li class="nav-item"><a class="nav-link" href="./cadastro-sessoes.html">Cadastro de Sessões</a></li>
+            <li class="nav-item"><a class="nav-link" href="./venda-ingressos.html">Venda de Ingressos</a></li>
+            <li class="nav-item"><a class="nav-link" href="./sessoes.html">Listagem de Sessões</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <div class="container text-center">
+        <h2>Cadastro de Filmes</h2>
+        <p>Clique no botão abaixo para cadastrar um novo filme:</p>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCadastroFilme">
+        Cadastrar Filme
+        </button>
+    </div>
+    <div class="modal fade" id="modalCadastroFilme" tabindex="-1" aria-labelledby="modalCadastroFilmeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="form-filme">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCadastroFilmeLabel">Cadastrar Novo Filme</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" class="form-control" id="titulo" required>
+                </div>
+                <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" required></textarea>
+                </div>
+                <div class="mb-3">
+                <label for="genero" class="form-label">Gênero</label>
+                <select class="form-select" id="genero" required>
+                    <option value="">Selecione</option>
+                    <option>Ação</option>
+                    <option>Comédia</option>
+                    <option>Drama</option>
+                    <option>Terror</option>
+                    <option>Romance</option>
+                </select>
+                </div>
+                <div class="mb-3">
+                <label for="classificacao" class="form-label">Classificação Indicativa</label>
+                <select class="form-select" id="classificacao" required>
+                    <option value="">Selecione</option>
+                    <option>Livre</option>
+                    <option>10</option>
+                    <option>12</option>
+                    <option>14</option>
+                    <option>16</option>
+                    <option>18</option>
+                </select>
+                </div>
+                <div class="mb-3">
+                <label for="duracao" class="form-label">Duração (minutos)</label>
+                <input type="number" class="form-control" id="duracao" required>
+                </div>
+                <div class="mb-3">
+                <label for="estreia" class="form-label">Data de Estreia</label>
+                <input type="date" class="form-control" id="estreia" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary">Salvar Filme</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <h2>Listagem de Filmes</h2>
+        <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>Titulo</th>
+                <th>Descrição</th>
+                <th>Genero</th>
+                <th>Classificação</th>
+                <th>Duração</th>
+                <th>Estreia</th>
+            </tr>
+            </thead>
+            <tbody id="tabela-filmes">
+            </tbody>
+        </table>
+    </div>
+</div>
+  <script src="../scripts/cadastroFilme.js"></script>
+</body>
+</html>
