@@ -30,6 +30,7 @@ document.getElementById("form-venda").addEventListener("submit", function(e) {
     } else {
         adicionarDado("ingressos", ingresso);
     }
+    if (localStorage.getItem("sessaoSelecionada")) {localStorage.removeItem("sessaoSelecionada");}
     alert("Ingresso Salvo.");
     document.getElementById("form-venda").reset();
     ListarIngressos();
@@ -41,23 +42,26 @@ function VenderIngresso() {
   
     const select = document.getElementById("sessao");
 
-    const sessao = JSON.parse(localStorage.getItem("sessaoSelecionada"));
+    const ingresso = localStorage.getItem("sessaoSelecionada");
+
     if (select) {
         select.innerHTML = "";
-        
-        if (sessao){
+    
+        if (ingresso){
 
-            let s = sessoes[sessao];
+            const sessao_index = JSON.parse(ingresso);
 
-            localStorage.removeItem("sessaoSelecionada")
+            let s = sessoes[sessao_index];
 
-            const opt = new Option(`${filmes[s.filmeIndex]?.titulo} - ${s.data} ${s.horario}`, i, true);
+            console.log("")
+
+            const opt = new Option(`${filmes[s.filmeIndex].titulo} - ${s.data_hora.replace("T", " ")}`, 0, true);
             select.appendChild(opt);
 
         }
         else{
             sessoes.forEach((s, i) => {
-                const opt = new Option(`${filmes[s.filmeIndex]?.titulo} - ${s.data} ${s.horario}`, i);
+                const opt = new Option(`${filmes[s.filmeIndex].titulo} - ${s.data_hora.replace("T", " ")}`, i);
                 select.appendChild(opt);
             });
         }
@@ -71,7 +75,7 @@ function editarIngresso(index) {
     const ingresso = ingressos[index];
     indiceEditando = index;
 
-    document.getElementById("sessao").value = ingresso.sessao;
+    document.getElementById("sessao").value = ingresso.sessao_index;
     document.getElementById("nome-cliente").value = ingresso.nome_cliente;
     document.getElementById("cpf").value = ingresso.cpf;
     document.getElementById("assento-nome").value = ingresso.assento;
@@ -88,7 +92,9 @@ function excluirIngresso(index) {
 }
 
 function ListarIngressos(){
-    const ingressos = pegarDados("ingressos")
+    const ingressos = pegarDados("ingressos");
+    const sessoes = pegarDados("sessoes");
+    const filmes = pegarDados("filmes")
     const tbody = document.querySelector("tbody");
 
     if (tbody) {
@@ -96,7 +102,7 @@ function ListarIngressos(){
         ingressos.forEach((i, index) => {
             const linha = document.createElement("tr");
             linha.innerHTML = `
-                <td>${i.sessao}</td>
+                <td>${filmes[sessoes[i.sessao].filmeIndex].titulo}</td>
                 <td>${i.nome_cliente}</td>
                 <td>${i.cpf}</td>
                 <td>${i.assento}</td>
@@ -112,8 +118,3 @@ function ListarIngressos(){
 }
 
 ListarIngressos();
-
-window.onclick = function () {
-
-    VenderIngresso();
-}

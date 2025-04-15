@@ -10,20 +10,20 @@ function carregarDado(chave) {
 
 
 function ListarSessoes() {
-    const sessoes = carregarDado("sessoes");
     const filmes = carregarDado("filmes");
     const salas = carregarDado("salas");
+    const sessoes = carregarDado("sessoes");
     const tbody = document.querySelector("tbody");
   
     if (tbody) {
         tbody.innerHTML = ""
-      sessoes.forEach((s, index) => {
+        sessoes.forEach((s, index) => {
         const linha = document.createElement("tr");
         linha.innerHTML = `
             <td>${filmes[s.filmeIndex].titulo}</td>
             <td>${salas[s.salaIndex].nome}</td>
-            <td>${s.data}</td>
-            <td>${s.horario}</td>
+            <td>${s.data_hora.replace("T", " ")}</td>
+            <td>R$${s.preco}</td>
             <td><button class="btn btn-primary" onclick="selecionarSessao(${index})">Comprar Ingresso</button></td>
         `;
         tbody.appendChild(linha);

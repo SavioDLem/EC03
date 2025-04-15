@@ -14,7 +14,8 @@ document.getElementById("form-sala").addEventListener("submit", function (event)
     event.preventDefault();
     const sala = {
         nome: document.getElementById("nomeSala").value,
-        capacidade: document.getElementById("capacidade").value
+        capacidade: document.getElementById("capacidade").value,
+        tipo: document.getElementById("tipo-sala").value
     };
     const salas = pegarDados("sala")
 
@@ -38,7 +39,7 @@ function editarSala(index) {
 
     document.getElementById("nomeSala").value = sala.nome;
     document.getElementById("capacidade").value = sala.capacidade;
-    
+    document.getElementById("tipo-sala").value = sala.tipo;
 }
 
 function excluirSala(index) {
@@ -60,7 +61,8 @@ function ListarSalas() {
             const linha = document.createElement("tr");
             linha.innerHTML = `
                 <td>${s.nome}</td>
-                <td>${s.capacidade}
+                <td>${s.capacidade}</td>
+                <td>${s.tipo}</td>
                 <td>
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalSala" onclick="editarSala(${index})">Editar</button>
                     <button class="btn btn-danger btn-sm ms-1" onclick="excluirSala(${index})">Excluir</button>

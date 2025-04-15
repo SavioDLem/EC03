@@ -3,39 +3,35 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro de Salas</title>
+    <title>Cadastrar Sala</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
         <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html">Cinema</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="./cadastro-filmes.html">Cadastro de Filmes</a></li>
-            <li class="nav-item"><a class="nav-link active" href="./cadastro-salas.html">Cadastro de Salas</a></li>
-            <li class="nav-item"><a class="nav-link" href="./cadastro-sessoes.html">Cadastro de Sessões</a></li>
-            <li class="nav-item"><a class="nav-link" href="./venda-ingressos.html">Venda de Ingressos</a></li>
-            <li class="nav-item"><a class="nav-link" href="./sessoes.html">Listagem de Sessões</a></li>
-            </ul>
-        </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="./cadastro-filmes.html">Cadastrar Filme</a></li>
+                <li class="nav-item"><a class="nav-link active" href="./cadastro-salas.html">Cadastrar Sala</a></li>
+                <li class="nav-item"><a class="nav-link" href="./cadastro-sessoes.html">Cadastrar Sessão</a></li>
+                <li class="nav-item"><a class="nav-link" href="./venda-ingressos.html">Vender Ingresso</a></li>
+                <li class="nav-item"><a class="nav-link" href="./sessoes.html">Listar Sessões</a></li>
+                </ul>
+            </div>
+        <a class="navbar-brand" href="../index.html">Cin.Ema</a>
         </div>
     </nav>
-
-    <!-- Botão centralizado -->
     <div class="container mt-4">
         <div class="text-center">
-        <h2>Cadastro de Salas</h2>
+        <h2>Cadastrar Sala</h2>
         <p>Clique no botão abaixo para cadastrar uma nova sala:</p>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSala">Cadastrar Sala</button>
         </div>
     </div>
-
-    <!-- Modal -->
     <div class="modal fade" id="modalSala" tabindex="-1" aria-labelledby="modalSalaLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -46,12 +42,20 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                <label for="nomeSala" class="form-label">Nome da Sala</label>
-                <input type="text" class="form-control" id="nomeSala" required>
+                    <label for="nomeSala" class="form-label">Nome da Sala</label>
+                    <input type="text" class="form-control" id="nomeSala" required>
                 </div>
                 <div class="mb-3">
-                <label for="capacidade" class="form-label">Capacidade</label>
-                <input type="number" class="form-control" id="capacidade" required>
+                    <label for="capacidade" class="form-label">Capacidade</label>
+                    <input type="number" class="form-control" id="capacidade" required>
+                </div>
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <select class="form-select" id="tipo-sala" required>
+                        <option>2D</option>
+                        <option>3D</option>
+                        <option>IMAX</option>
+                    </select>
                 </div>
             </div>
             <div class="modal-footer">
@@ -71,6 +75,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Capacidade</th>
+                <th>Tipo</th>
                 <th>Opções</th>
             </tr>
             </thead>

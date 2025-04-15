@@ -8,67 +8,77 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-  <!-- Navbar fixa no topo -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="../index.html">Cinema</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="./cadastro-filmes.html">Cadastro de Filmes</a></li>
-          <li class="nav-item"><a class="nav-link" href="./cadastro-salas.html">Cadastro de Salas</a></li>
-          <li class="nav-item"><a class="nav-link active" href="./cadastro-sessoes.html">Cadastro de Sessões</a></li>
-          <li class="nav-item"><a class="nav-link" href="./venda-ingressos.html">Venda de Ingressos</a></li>
-          <li class="nav-item"><a class="nav-link" href="./sessoes.html">Listagem de Sessões</a></li>
+          <li class="nav-item"><a class="nav-link" href="./cadastro-filmes.html">Cadastrar Filme</a></li>
+          <li class="nav-item"><a class="nav-link" href="./cadastro-salas.html">Cadastrar Sala</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./cadastro-sessoes.html">Cadastrar Sessão</a></li>
+          <li class="nav-item"><a class="nav-link" href="./venda-ingressos.html">Vender Ingresso</a></li>
+          <li class="nav-item"><a class="nav-link" href="./sessoes.html">Listar Sessões</a></li>
         </ul>
       </div>
+      <a class="navbar-brand" href="../index.html">Cin.Ema</a>
     </div>
   </nav>
 
-  <!-- Botão centralizado no topo -->
   <div class="container text-center mt-4">
-    <h2>Cadastro de Sessões</h2>
+    <h2>Cadastrar Sessão</h2>
     <p>Clique no botão abaixo para cadastrar uma nova sessão:</p>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSessao">Cadastrar Sessão</button>
   </div>
-
-  <!-- Modal -->
   <div class="modal fade" id="modalSessao" tabindex="-1" aria-labelledby="modalSessaoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <form id="form-sessao">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalSessaoLabel">Cadastrar Sessão</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="filme" class="form-label">Filme</label>
-              <select class="form-select" id="filme" required></select>
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="form-sessao">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalSessaoLabel">Cadastrar Sessão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
-            <div class="mb-3">
-              <label for="sala" class="form-label">Sala</label>
-              <select class="form-select" id="sala" required></select>
+            <div class="modal-body">
+                <div class="mb-3">
+                <label for="filme" class="form-label">Filme</label>
+                <select class="form-select" id="filme" required></select>
+                </div>
+                <div class="mb-3">
+                <label for="sala" class="form-label">Sala</label>
+                <select class="form-select" id="sala" required></select>
+                </div>
+                <div class="mb-3">
+                <label for="data-hora" class="form-label">Data e Hora</label>
+                <input type="datetime-local" class="form-control" id="data-hora" required>
+                </div>
+                <div class="mb-3">
+                <label for="preço" class="form-label">Preço</label>
+                <input type="number" class="form-control" id="preço" required>
             </div>
-            <div class="mb-3">
-              <label for="data" class="form-label">Data</label>
-              <input type="date" class="form-control" id="data" required>
+                <div class="mb-3">
+                <label for="idioma-sessao" class="form-label">Idioma</label>
+                <select class="form-select" id="idioma-sessao" required>
+                    <option>Dublado</option>
+                    <option>Legendado</option>
+                </select>
+                </div>
+                <div class="mb-3">
+                <label for="formato-sessao" class="form-label">Formato</label>
+                <select class="form-select" id="formato-sessao" required>
+                    <option>2D</option>
+                    <option>3D</option>
+                </select>
+                </div>
             </div>
-            <div class="mb-3">
-              <label for="horario" class="form-label">Horário</label>
-              <input type="time" class="form-control" id="horario" required>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Salvar Sessão</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Salvar Sessão</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          </div>
-        </form>
-      </div>
+            </form>
+        </div>
+        </div>
     </div>
-  </div>
-  <script src="../scripts/cadastroSessao.js"></script>
+    <script src="../scripts/cadastroSessao.js"></script>
 </body>
 </html>
