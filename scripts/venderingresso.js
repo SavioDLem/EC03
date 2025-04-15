@@ -53,9 +53,7 @@ function VenderIngresso() {
 
             let s = sessoes[sessao_index];
 
-            console.log("")
-
-            const opt = new Option(`${filmes[s.filmeIndex].titulo} - ${s.data_hora.replace("T", " ")}`, 0, true);
+            const opt = new Option(`${filmes[s.filmeIndex].titulo} - ${s.data_hora.replace("T", " ")}`, sessao_index, true);
             select.appendChild(opt);
 
         }
@@ -75,7 +73,26 @@ function editarIngresso(index) {
     const ingresso = ingressos[index];
     indiceEditando = index;
 
-    document.getElementById("sessao").value = ingresso.sessao_index;
+    const select = document.getElementById("sessao");
+
+    const sessoes = pegarDados("sessoes");
+
+    const filmes = pegarDados("filmes");
+
+    select.innerHTML = "";
+
+    sessoes.forEach((s, i) => {
+
+        let opt;
+        if (i == ingresso.sessao){
+            opt = new Option(`${filmes[s.filmeIndex].titulo} - ${s.data_hora.replace("T", " ")}`, i, true, true);
+        }
+        else{
+            opt = new Option(`${filmes[s.filmeIndex].titulo} - ${s.data_hora.replace("T", " ")}`, i);
+        }
+        select.appendChild(opt);
+    });
+
     document.getElementById("nome-cliente").value = ingresso.nome_cliente;
     document.getElementById("cpf").value = ingresso.cpf;
     document.getElementById("assento-nome").value = ingresso.assento;
