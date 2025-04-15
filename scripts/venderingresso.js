@@ -1,10 +1,10 @@
-function salvarDado(chave, dado) {
+function adicionarDado(chave, dado) {
     const dados = JSON.parse(localStorage.getItem(chave) || "[]");
     dados.push(dado);
     localStorage.setItem(chave, JSON.stringify(dados));
 }
   
-function carregarDado(chave) {
+function pegarDados(chave) {
     return JSON.parse(localStorage.getItem(chave) || "[]");
 }
 
@@ -12,22 +12,32 @@ document.getElementById("form-venda").addEventListener("submit", function(e) {
     
     e.preventDefault();
 
-    console.log("Teste");
     const ingresso = {
-        sessao: document.getElementById("sessao").value, 
+        sessao: document.getElementById("sessao").value,
         nome_cliente: document.getElementById("nome-cliente").value,
         cpf: document.getElementById("cpf").value,
         assento: document.getElementById("assento-nome").value,
         tipoPagamento: document.getElementById("tipo-pagamento").value
     };
-    salvarDado("ingressos", ingresso);
+
+    const ingressos = pegarDados("ingressos");
+
+    if (indiceEditando !== null) {
+        ingressos[indiceEditando] = ingresso; 
+        indiceEditando = null;
+        localStorage.setItem("ingressos", JSON.stringify(ingressos));
+
+    } else {
+        adicionarDado("ingressos", ingresso);
+    }
+    alert("Ingresso Salvo.");
     document.getElementById("form-venda").reset();
     ListarIngressos();
 });
 
 function VenderIngresso() {
-    let sessoes = carregarDado("sessoes");
-    const filmes = carregarDado("filmes");
+    let sessoes = pegarDados("sessoes");
+    const filmes = pegarDados("filmes");
   
     const select = document.getElementById("sessao");
 
@@ -37,38 +47,67 @@ function VenderIngresso() {
         
         if (sessao){
 
-            sessoes = [sessoes[sessao]]
+            let s = sessoes[sessao];
 
             localStorage.removeItem("sessaoSelecionada")
 
-        }
-
-        sessoes.forEach((s, i) => {
-            const opt = new Option(`${filmes[s.filmeIndex]?.titulo} - ${s.data} ${s.horario}`, i);
+            const opt = new Option(`${filmes[s.filmeIndex]?.titulo} - ${s.data} ${s.horario}`, i, true);
             select.appendChild(opt);
-        });
+
+        }
+        else{
+            sessoes.forEach((s, i) => {
+                const opt = new Option(`${filmes[s.filmeIndex]?.titulo} - ${s.data} ${s.horario}`, i);
+                select.appendChild(opt);
+            });
+        }
+    }
+}
+
+let indiceEditando = null;
+
+function editarIngresso(index) {
+    const ingressos = pegarDados("ingressos");
+    const ingresso = ingressos[index];
+    indiceEditando = index;
+
+    document.getElementById("sessao").value = ingresso.sessao;
+    document.getElementById("nome-cliente").value = ingresso.nome_cliente;
+    document.getElementById("cpf").value = ingresso.cpf;
+    document.getElementById("assento-nome").value = ingresso.assento;
+    document.getElementById("tipo-pagamento").value = ingresso.tipoPagamento;
+}
+
+function excluirIngresso(index) {
+    const ingressos = pegarDados("ingressos");
+    if (confirm("Deseja realmente excluir este ingresso?")) {
+        ingressos.splice(index, 1);
+        localStorage.setItem("ingressos", JSON.stringify(ingressos));
+        ListarIngressos();
     }
 }
 
 function ListarIngressos(){
-    const sessoes = carregarDado("sessoes");
-    const filmes = carregarDado("filmes");
-    const ingressos = carregarDado("ingressos")
+    const ingressos = pegarDados("ingressos")
     const tbody = document.querySelector("tbody");
 
     if (tbody) {
-        tbody.innerHTML = ""
-      ingressos.forEach(i => {
-        const linha = document.createElement("tr");
-        linha.innerHTML = `
-          <td>${filmes[sessoes[i.sessao].filmeIndex].titulo}</td>
-          <td>${i.nome_cliente}</td>
-          <td>${i.cpf}</td>
-          <td>${i.assento}</td>
-          <td>${i.tipoPagamento}</td>
-        `;
-        tbody.appendChild(linha);
-      });
+        tbody.innerHTML = "";
+        ingressos.forEach((i, index) => {
+            const linha = document.createElement("tr");
+            linha.innerHTML = `
+                <td>${i.sessao}</td>
+                <td>${i.nome_cliente}</td>
+                <td>${i.cpf}</td>
+                <td>${i.assento}</td>
+                <td>${i.tipoPagamento}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalVenda" onclick="editarIngresso(${index})">Editar</button>
+                    <button class="btn btn-danger btn-sm ms-1" onclick="excluirIngresso(${index})">Excluir</button>
+                </td>
+            `;
+            tbody.appendChild(linha);
+        });
     }
 }
 

@@ -19,14 +19,14 @@ function CadastrarSessao() {
     if (filmeSelect && salaSelect) {
       filmes.forEach((f, i) => {
         if (f && typeof f.titulo === "string" && f.titulo.trim() !== "") {
-          let opt = new Option(f.titulo, i); // mantém índice original
+          let opt = new Option(f.titulo, i);
           filmeSelect.appendChild(opt);
         }
       });
   
       salas.forEach((s, i) => {
         if (s && typeof s.nome === "string" && s.nome.trim() !== "") {
-          let opt = new Option(s.nome, i); // mantém índice original
+          let opt = new Option(s.nome, i);
           salaSelect.appendChild(opt);
         }
       });
@@ -36,10 +36,10 @@ function CadastrarSessao() {
 document.getElementById("form-sessao").addEventListener("submit", function(event) {
     event.preventDefault();
     const sessao = {
-      filmeIndex: document.getElementById("filme").value,
-      salaIndex: document.getElementById("sala").value,
-      data: document.getElementById("data").value,
-      horario: document.getElementById("horario").value
+        filmeIndex: document.getElementById("filme").value,
+        salaIndex: document.getElementById("sala").value,
+        data: document.getElementById("data").value,
+        horario: document.getElementById("horario").value
     };
     salvarDado("sessoes", sessao);
     alert("Sessão salva.");
